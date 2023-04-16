@@ -1,0 +1,14 @@
+version: "3"
+services:
+  houses_mongo:
+    image: mongo:latest
+    container_name: "houses_mongo"
+    ports:
+      - 27018:27017
+  house_services:
+    image: house_services:2.0
+    container_name: house_services
+    ports:
+      - 8080:8080
+    links:
+      - houses_mongo

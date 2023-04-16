@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      database: House
+      host: houses_mongo
+      port: 27017

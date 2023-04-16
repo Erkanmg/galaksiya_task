@@ -53,6 +53,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>House_service</finalName>
 	</build>
 
 </project>
