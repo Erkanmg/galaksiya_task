@@ -30,12 +30,6 @@ public class HouseController {
         return new ResponseEntity<>(getHouseById(id), OK);
     }
 
-    @GetMapping("{price}")
-    public ResponseEntity<House> getHouseByPrice(@PathVariable Integer price) {
-        return new ResponseEntity<>(houseService.getHouseByPrice(price).get(), OK);
-    }
-
-
     @PostMapping
     public ResponseEntity<House> createHouse(@RequestBody House newHouse) {
         return new ResponseEntity<>(houseService.createHouse(newHouse), CREATED);

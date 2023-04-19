@@ -10,5 +10,4 @@ public interface HouseRepository extends MongoRepository<House, String> {
     List<House> findAllByName(String name);
     Optional<House> findByName(String name);
 
-    Optional<House> findByPrice(Integer price);
 }

@@ -2,5 +2,5 @@ spring:
   data:
     mongodb:
       database: House
-      host: houses_mongo
+      host: houses_mongo1
       port: 27017

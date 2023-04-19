@@ -27,12 +27,13 @@ public class HouseService {
 
     public House createHouse(House newHouse) {
 
-        Optional<House> ilByName = houseRepository.findByName(newHouse.getName());
-        if (ilByName.isPresent()) {
+        Optional<House> houseByName = houseRepository.findByName(newHouse.getName());
+        if (houseByName.isPresent()) {
             throw new HouseAlreadyExistsException("House already exists with name: " + newHouse.getName());
         }
         return houseRepository.save(newHouse);
     }
+
 
     public void deleteHouse(String id) {
         houseRepository.deleteById(id);
@@ -43,9 +44,6 @@ public class HouseService {
                 .orElseThrow(() -> new HouseNotFoundException("House not found with id: " + id));
     }
 
-    public Optional<House> getHouseByPrice(Integer price) {
-        return houseRepository.findByPrice(price);
-    }
 
     public void updateHouse(String id, House newHouse) {
         House oldHouse = getHouseById(id);

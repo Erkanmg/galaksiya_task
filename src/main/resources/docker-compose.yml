@@ -1,14 +1,40 @@
 version: "3"
 services:
-  houses_mongo:
+  houses_mongo1:
     image: mongo:latest
-    container_name: "houses_mongo"
+    container_name: "houses_mongo1"
     ports:
-      - 27018:27017
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
   house_services:
-    image: house_services:2.0
+    image: house_services:2.4
     container_name: house_services
     ports:
-      - 8080:8080
+      - "8080:80"
+    depends_on:
+      - houses_mongo1
     links:
-      - houses_mongo
+      - houses_mongo1
+    #environment:
+    #  - SPRING_DATA_MONGODB_URI=houses_mongo1://houses_mongo1:27017/House
+  swagger:
+    image: swaggerapi/swagger-ui
+    container_name: swagger_ui
+    ports:
+      - "8081:80"
+    environment:
+      - SWAGGER_URL=/v3/api-docs
+      - SWAGGER_BASE_URL=/swagger-ui.html
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/opt/homebrew/etc/nginx/nginx.conf:ro
+    depends_on:
+      - house_services
+      - swagger
+volumes:
+   mongo_data:
